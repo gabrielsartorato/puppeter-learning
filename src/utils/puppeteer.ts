@@ -8,7 +8,7 @@ interface ParamsDestinty {
 
 interface ArrayStop {
   stop?: string[];
-  line_type?: string;
+  line_type?: string[];
   line_alternative_name?: string;
 }
 
@@ -30,7 +30,9 @@ async function gettingData({
     stops.map((stop) => {
       const array_stops = <ArrayStop[]>[];
       const stoped = stop.querySelectorAll('.line__stop');
-      const line_type = stop.querySelector('.line__name')?.textContent || '';
+      const line_type = stop
+        .querySelector('.line__name')
+        ?.textContent?.match(/[0-2][0-9]:[0-5][0-9]/g);
       const line_alternative_name =
         stop.querySelector('.line__name-alternative')?.textContent || '';
 
